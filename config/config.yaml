@@ -1,0 +1,5 @@
+name: UserAPI
+queue: user_queue
+methods:
+  GetUser: "Retrieve user information"
+  CreateUser: "Create a new user"

@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../:/workspaces/${localWorkspaceFolderName}:cached
+    command: sleep infinity
+    ports:
+      - "9000:9000"
+    networks:
+      - dev-network
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - dev-network
+
+  redis-insight:
+    image: redislabs/redisinsight:latest
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    volumes:
+      - redis-insight-data:/db
+    networks:
+      - dev-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+  rabbitmq-data:
+  redis-insight-data:
