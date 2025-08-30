@@ -14,7 +14,7 @@
 	},
 	"portsAttributes": {
 		"9000": {
-			"label": "Hello Remote World",
+			"label": "Fuzzy Potato",
 			"onAutoForward": "notify"
 		},
 		"6379": {
@@ -28,18 +28,13 @@
 		"15672": {
 			"label": "RabbitMQ Management",
 			"onAutoForward": "notify"
-		},
-		"8001": {
-			"label": "RedisInsight",
-			"onAutoForward": "notify"
 		}
 	},
 	"forwardPorts": [
 		9000,
 		6379,
 		5672,
-		15672,
-		8001
+		15672
 	],
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "go version"

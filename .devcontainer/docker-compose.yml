@@ -23,16 +23,6 @@ services:
     networks:
       - dev-network
 
-  redis-insight:
-    image: redislabs/redisinsight:latest
-    restart: unless-stopped
-    ports:
-      - "8001:8001"
-    volumes:
-      - redis-insight-data:/db
-    networks:
-      - dev-network
-
   rabbitmq:
     image: rabbitmq:3-management-alpine
     restart: unless-stopped
