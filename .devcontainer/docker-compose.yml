@@ -1,10 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: mcr.microsoft.com/devcontainers/go:1.25
+    container_name: fuzzy-potato-app
+    restart: unless-stopped
     volumes:
       - ../:/workspaces/${localWorkspaceFolderName}:cached
     command: sleep infinity
@@ -14,7 +14,7 @@ services:
       - dev-network
 
   redis:
-    image: redis:7-alpine
+    image: redis:8-alpine
     restart: unless-stopped
     ports:
       - "6379:6379"
@@ -24,7 +24,7 @@ services:
       - dev-network
 
   rabbitmq:
-    image: rabbitmq:3-management-alpine
+    image: rabbitmq:4-management-alpine
     restart: unless-stopped
     ports:
       - "5672:5672"
